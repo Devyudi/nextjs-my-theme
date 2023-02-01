@@ -17,12 +17,13 @@ const TopBarDesktop = () => {
                     ConfigMenu.map((child, i) => {
 
                         return Array.isArray(child?.submenu) && child?.submenu.length === 0 ?
-                            <Menu.Item key={child?.key}>
+                            <Menu.Item key={child?.key} className={'poppins'}>
                                 <span>{child?.label}</span>
                                 <Link href={child?.path}/>
                             </Menu.Item>
                             : (
                                 <Menu.SubMenu
+                                    className={'poppins'}
                                     disabled={child?.disabled ?? false}
                                     icon={
                                         null
@@ -33,13 +34,13 @@ const TopBarDesktop = () => {
                                     {
                                         child?.submenu.map((item, key) => {
                                             return Array.isArray(item?.submenu) && item?.submenu.length === 0  ?(
-                                                <Menu.Item key={item?.key}>
+                                                <Menu.Item key={item?.key} className={'poppins'}>
                                                     <span>{item?.label}</span>
                                                     <Link href={item?.path}/>
                                                 </Menu.Item>
                                             ): (
                                                 <Menu.SubMenu
-                                                    className={'app-submenu '}
+                                                    className={'app-submenu poppins'}
                                                     disabled={item?.disabled ?? false}
                                                     icon={null}
                                                     key={item?.key}
@@ -48,7 +49,7 @@ const TopBarDesktop = () => {
                                                     {
                                                         item?.submenu.map((child2, key) => {
                                                             return Array.isArray(child2?.submenu) && child2?.submenu.length === 0  ?(
-                                                                <Menu.Item key={child2?.key}>
+                                                                <Menu.Item key={child2?.key} className={'poppins'}>
                                                                     <span>{child2?.label}</span>
                                                                     <Link href={child2?.path}/>
                                                                 </Menu.Item>

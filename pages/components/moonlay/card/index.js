@@ -104,7 +104,7 @@ export default function Index(props) {
                                                         alt: 'image-dummy',
                                                         fallback: 'logo-next.png'
                                                     }}
-                                                    url={'/product-1'}
+                                                    url={['/product',item?.id,item?.slug].join('/')}
                                                     price={{
                                                         prefix:'Rp',
                                                         total:item?.price

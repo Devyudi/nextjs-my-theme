@@ -19,11 +19,9 @@ export async function middleware(req) {
     const token = await getToken({
             req,
             secret: process.env.SECRET,
-            secureCookie:process.env.NODE_ENV  === "PROD"
+            secureCookie:process.env.NODE_ENV  === "production"
         }
     )
-    console.log({token})
-
 
     /**
      * jika token ada
@@ -32,16 +30,11 @@ export async function middleware(req) {
         return NextResponse.rewrite(new URL('/profile'),req.url)
     }
 
-    console.log(req)
-
-    console.log(req.nextUrl.pathname.startsWith('/profile'),'PROFILE')
     if (req.nextUrl.pathname.startsWith('/profile')) {
-        console.log('Kesini profile')
         return NextResponse.redirect(new URL('/auth/login', req.url))
     }
 
     if (req.nextUrl.pathname.startsWith('/dashboard') && !token) {
-        console.log('Kesini dia')
         return NextResponse.redirect(new URL('/auth/login', req.url))
     }
 
