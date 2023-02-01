@@ -39,7 +39,7 @@ function PageHeadAlt({title,description,icon}){
                     <IconComponent icon={icon}/>
                     <h1 className={'font-bold tracking-wides'}>{title}</h1>
                 </div>
-                <p className={'font-normal text-normal tracking-wides'}>{description}</p>
+                <p className={'font-normal text-normal tracking-wides poppins'}>{description}</p>
             </ContainerLayout>
         </div>
     )

@@ -6,14 +6,19 @@
  ******************************************************************************/
 
 import React from 'react'
-import {ContainerLayout, WrapperLayout} from "@moonlay/src/components/shared-layout";
 
 export default function Index(props){
     return (
-        <WrapperLayout>
-            <ContainerLayout>
-                <p>Lorem ipsum dolor sit amet</p>
-            </ContainerLayout>
-        </WrapperLayout>
+        <div className="w-full">
+            <h1>Profile</h1>
+        </div>
     )
+}
+
+export async function getServerSideProps(ctx){
+    return {
+        props: {
+            data:[]
+        }
+    }
 }

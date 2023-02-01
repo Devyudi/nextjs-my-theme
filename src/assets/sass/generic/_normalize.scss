@@ -4,9 +4,9 @@
 // @contact +6285718851007
 
 body {
-  @include themify($themes) {
-    background: themed('body') !important;
-  }
+  //@include themify($themes) {
+  //  background: themed('body') !important;
+  //}
 }
 
 header{
@@ -16,10 +16,10 @@ header{
 }
 
 .dark{
-  body, h1,h2,h3,h4,h5,h6,div,p,span{
+  body, h1,h2,h3,h4,h5,h6,div,p,span,a{
     @include themify($themes){
       color: themed('text') !important;
-      fon-color: themed('text') !important;
+      font-color: themed('text') !important;
     }
   }
 }
