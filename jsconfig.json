@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@moonlay/*": ["./*"],
+      "@moonlay/helpers":["./src/lib/helpers/index"]
+    }
+  }
+}

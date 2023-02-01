@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @db.VarChar(100)
+  email    String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
+  createdAt DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime  @default(now()) @db.Timestamp(0)
+  deletedAt DateTime?
+
+  authors Posts_author[]
+
+  @@index([id], map: "index_user_id")
+
+}
+
+model Posts {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(255)
+  slug String @db.VarChar(255)
+  content String @db.LongText
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @db.Timestamp(0)
+  deletedAt DateTime?
+
+  authors Posts_author[]
+  seo Posts_seo[]
+  @@index([id], map: "index_post_id")
+}
+
+model Posts_author {
+  id Int @id @default(autoincrement())
+  posts Posts @relation(fields: [postsId],references: [id])
+  postsId Int @db.Int // relation scalar field  (used in the `@relation` attribute above)
+  author  User @relation(fields: [authorId],references: [id])
+  authorId Int // relation scalar field  (used in the `@relation` attribute above)
+
+  @@index([id], map: "index_post_author_id")
+}
+
+model Posts_seo {
+  id Int @id @default(autoincrement())
+  posts    Posts @relation(fields: [postsId], references: [id])
+  postsId Int @db.Int
+  hashId       String? @db.VarChar(10)
+  seo_slug      String  @db.VarChar(255)
+  original_url  String? @db.VarChar(255)
+  canonical_url String? @db.VarChar(255)
+  seo_keyword   String? @db.VarChar(255)
+  seo_title     String? @db.VarChar(255)
+  seo_summary   String? @db.VarChar(255)
+  seo_img_alt   String? @db.VarChar(255)
+  seo_content   String? @db.VarChar(255)
+  seo_status    Int     @default(0)
+
+  @@index([id], map: "index_posts_seo_id")
+}

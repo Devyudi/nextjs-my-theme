@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+      <urlset xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+      xmlns:xhtml="http://www.w3.org/1999/xhtml">
+      
+	<url>
+		<loc>http://localhost:3000/404</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="http://localhost:3000/404" /><xhtml:link rel="alternate" hreflang="es" href="http://localhost:3000/404" /><xhtml:link rel="alternate" hreflang="ja" href="http://localhost:3000/404" /><xhtml:link rel="alternate" hreflang="fr" href="http://localhost:3000/404" />
+		<lastmod>2023-01-24</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/api/auth/[...nextauth]</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="http://localhost:3000/api/auth/[...nextauth]" /><xhtml:link rel="alternate" hreflang="es" href="http://localhost:3000/api/auth/[...nextauth]" /><xhtml:link rel="alternate" hreflang="ja" href="http://localhost:3000/api/auth/[...nextauth]" /><xhtml:link rel="alternate" hreflang="fr" href="http://localhost:3000/api/auth/[...nextauth]" />
+		<lastmod>2023-01-24</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/api/hello</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="http://localhost:3000/api/hello" /><xhtml:link rel="alternate" hreflang="es" href="http://localhost:3000/api/hello" /><xhtml:link rel="alternate" hreflang="ja" href="http://localhost:3000/api/hello" /><xhtml:link rel="alternate" hreflang="fr" href="http://localhost:3000/api/hello" />
+		<lastmod>2023-01-24</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/auth/login</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="http://localhost:3000/auth/login" /><xhtml:link rel="alternate" hreflang="es" href="http://localhost:3000/auth/login" /><xhtml:link rel="alternate" hreflang="ja" href="http://localhost:3000/auth/login" /><xhtml:link rel="alternate" hreflang="fr" href="http://localhost:3000/auth/login" />
+		<lastmod>2023-01-24</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/auth/register</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="http://localhost:3000/auth/register" /><xhtml:link rel="alternate" hreflang="es" href="http://localhost:3000/auth/register" /><xhtml:link rel="alternate" hreflang="ja" href="http://localhost:3000/auth/register" /><xhtml:link rel="alternate" hreflang="fr" href="http://localhost:3000/auth/register" />
+		<lastmod>2023-01-24</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/hello</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="http://localhost:3000/hello" /><xhtml:link rel="alternate" hreflang="es" href="http://localhost:3000/hello" /><xhtml:link rel="alternate" hreflang="ja" href="http://localhost:3000/hello" /><xhtml:link rel="alternate" hreflang="fr" href="http://localhost:3000/hello" />
+		<lastmod>2023-01-24</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/index</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="http://localhost:3000/index" /><xhtml:link rel="alternate" hreflang="es" href="http://localhost:3000/index" /><xhtml:link rel="alternate" hreflang="ja" href="http://localhost:3000/index" /><xhtml:link rel="alternate" hreflang="fr" href="http://localhost:3000/index" />
+		<lastmod>2023-01-24</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/not-found</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="http://localhost:3000/not-found" /><xhtml:link rel="alternate" hreflang="es" href="http://localhost:3000/not-found" /><xhtml:link rel="alternate" hreflang="ja" href="http://localhost:3000/not-found" /><xhtml:link rel="alternate" hreflang="fr" href="http://localhost:3000/not-found" />
+		<lastmod>2023-01-24</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/extraPath</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="http://localhost:3000/extraPath" /><xhtml:link rel="alternate" hreflang="es" href="http://localhost:3000/extraPath" /><xhtml:link rel="alternate" hreflang="ja" href="http://localhost:3000/extraPath" /><xhtml:link rel="alternate" hreflang="fr" href="http://localhost:3000/extraPath" />
+		<lastmod>2023-01-24</lastmod>
+	</url>
+</urlset>

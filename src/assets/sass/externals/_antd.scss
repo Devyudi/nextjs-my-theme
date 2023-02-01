@@ -1,0 +1,198 @@
+//ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-light w-full border-0 css-dev-only-do-not-override-1n7nwfa
+
+.ant{
+  &-menu{
+
+    @include themify($themes){
+
+      background-color: themed('nav-hero') !important;
+    }
+
+    border-radius:52px ;
+    @include themify($themes){
+      color: themed('paragraf') !important;
+    }
+    &:hover{
+
+    }
+    &-title{
+      &:hover{
+        @include themify($themes){
+          color: lighten(themed('link'),10%) !important;
+        }
+      }
+      &-content{
+
+      }
+    }
+    &-root{
+
+    }
+
+    &-item{
+      &:hover{
+        @include themify($themes){
+          color: themed('paragraf') !important;
+        }
+      }
+      &-active{
+        &:hover{
+          @include themify($themes){
+            color: themed('link') !important;
+          }
+        }
+      }
+      &-selected{
+        @include themify($themes){
+          color: themed('link') !important;
+        }
+      }
+    }
+
+    &-horizontal{
+
+    }
+    &-light{
+      background-color: transparent !important;
+      @include themify($themes){
+        color: themed('paragraf') !important;
+      }
+    }
+
+    &-overflow{
+
+      &-item{
+
+      }
+    }
+
+
+    &-submenu{
+      &:hover{
+        @include themify($themes){
+          color: lighten(themed('link'),10%) !important;
+        }
+      }
+      &-open{
+        @include themify($themes){
+          background: themed('nav-hero') !important;
+        }
+
+      }
+
+      &-horizontal{
+
+      }
+
+      &-title{
+
+      }
+
+      &-active{
+        &:hover{
+          color: lighten(#0a53be, 60%) !important;
+        }
+      }
+    }
+  }
+
+
+  &-card{
+    //
+    //&:not(.ant-card-bordered){
+    //  border:0 !important;
+    //}
+
+    @include themify($themes){
+      background:themed('card') !important;
+      border-bottom: 1px solid darken(themed('card'),10%) !important;
+    }
+
+
+    &-head{
+      border:0 !important;
+
+      &-title{
+        @include themify($themes){
+          color:themed('text') !important;
+        }
+      }
+    }
+    &-bordered{
+      @include themify($themes){
+        border: 1px solid darken(themed('card'),10%) !important;
+      }
+    }
+  }
+
+
+  //ant-message
+}
+
+
+/**
+ * Ant message
+ */
+.ant{
+  &-message{
+    z-index: 9999999;
+    top:20px !important;
+
+    &-success{
+    }
+    &-custom{
+      &-content{
+        @include themify($themes){
+          color: themed('text') !important;
+        }
+      }
+    }
+
+    &-notice{
+      &-content{
+        @include themify($themes) {
+          background: themed('popConfirm') !important;
+        }
+      }
+    }
+  }
+}
+
+
+%antd-card {
+  .ant {
+    &-card {
+      @include themify($themes) {
+        background: themed('card') !important;
+      }
+    }
+  }
+}
+
+
+
+.app{
+  &-navbar{
+    .ant{
+      &-menu{
+        z-index: 9999 !important;
+        &-submenu{
+
+          &-popup{
+            z-index: 99999999 !important;
+          }
+          &-open{
+            //border:1px solid blue !important;
+
+            z-index: 99999999 !important;
+          }
+
+          &-active{
+            //position:absolute !important;
+            //border:1px solid green !important;
+          }
+        }
+      }
+    }
+  }
+}
