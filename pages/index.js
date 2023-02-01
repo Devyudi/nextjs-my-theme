@@ -43,13 +43,7 @@ export async function getServerSideProps(ctx){
   const handler = nc()
       .post(async (req, res, next) => {
         console.log(req?.body,'BODY')
-        // const newUser = await prisma.Posts.create({
-        //     data: {
-        //         name: 'Alice',
-        //         email: 'alice@prisma.io',
-        //     },
-        // })
-        next(); // <- make sure next() is called
+        next();
       });
   try {
     await handler.run(req, res);
