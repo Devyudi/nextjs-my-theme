@@ -68,7 +68,7 @@ WrapperLayout.defaultProps = {
     className: null,
     background: {
         dark: 'bg-[#262626]',
-        light: 'bg-[#ffffff]'
+        light: null
     }
 }
 

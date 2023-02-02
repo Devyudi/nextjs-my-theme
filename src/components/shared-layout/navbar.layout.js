@@ -7,7 +7,6 @@ import Link from "next/link";
 import {Button, Menu} from 'antd';
 import {useTheme} from "next-themes";
 
-
 const TopBarDesktop = () => {
     const router = useRouter();
     return (
@@ -103,7 +102,11 @@ export const NavbarLayout = (props) => {
                         <TopBarDesktop/>
                     </div>
                     <div className="h-full flex items-center gap-4">
-                        <Button ghost={theme === 'dark'}>Masuk</Button>
+                            <Link href={'/auth/login'}>
+                                <Button ghost={theme === 'dark'}>
+                                    <span>Masuk</span>
+                                </Button>
+                            </Link>
                         <Button type={'primary'} >Daftar</Button>
                     </div>
                 </ContainerLayout>
