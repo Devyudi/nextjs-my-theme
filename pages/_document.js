@@ -64,7 +64,7 @@ class MyDocument extends Document {
                         href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap&display=optional"
                         rel="stylesheet"/>
                 </Head>
-                <body className={'bg-fixed w-full pb-10'}>
+                <body className={'bg-fixed w-full'}>
                 <Main/>
 
                 <NextScript/>

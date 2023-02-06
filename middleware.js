@@ -11,36 +11,29 @@
  * @email yuyuid.id12@gmail.com
  * @contact +6285718851007
  ******************************************************************************/
-
+import fs from 'fs';
 import {NextResponse} from "next/server";
 import {getToken} from "next-auth/jwt";
 
-export async function middleware(req) {
+export async function middleware(req, res = NextResponse) {
     const token = await getToken({
             req,
             secret: process.env.SECRET,
             secureCookie:process.env.NODE_ENV  === "production"
         }
     )
-
     /**
      * jika token ada
      */
     if(req.nextUrl.pathname.startsWith('/auth') && token){
-        return NextResponse.rewrite(new URL('/profile'),req.url)
+        return NextResponse.redirect(new URL([req.nextUrl.origin,'dashboard'].join('/')),req.url)
+    }else if (req.nextUrl.pathname.startsWith('/dashboard') && !token){
+        return NextResponse.redirect(new URL([req.nextUrl.origin,'dashboard'].join('/'), req.url))
+    }else{
+        return NextResponse.next()
     }
-
-    if (req.nextUrl.pathname.startsWith('/profile')) {
-        return NextResponse.redirect(new URL('/auth/login', req.url))
-    }
-
-    if (req.nextUrl.pathname.startsWith('/dashboard') && !token) {
-        return NextResponse.redirect(new URL('/auth/login', req.url))
-    }
-
-    NextResponse.next()
 }
 
 export const config = {
-    matcher: ['/dashboard/:path','/dashboard','/profile','/profile/:path'],
+    matcher: ['/dashboard/:path*','/dashboard','/profile','/profile/:path','/auth/:path*'],
 }

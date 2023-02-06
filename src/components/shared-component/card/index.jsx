@@ -22,10 +22,6 @@ class Card extends Component{
         return (
             <div className="w-full min-h-60 bg-white  rounded-xl overflow-hidden">
                 <div className="h-40 border w-full relative rounded-xl">
-                    {/*<picture className={'w-full '}>*/}
-                    {/*    <source srcSet={'https://images.unsplash.com/photo-1531564701487-f238224b7ce3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'}/>*/}
-
-                    {/*</picture>*/}
                     <Image
                         width={1920}
                         height={1920}

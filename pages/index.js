@@ -7,8 +7,11 @@ import {Card} from "@moonlay/src/components/shared-component/card";
 import Grid from "@moonlay/src/components/shared-component/grid/default.grid";
 import { Button, Form, Input, InputNumber } from 'antd';
 import MetaHead from "@moonlay/src/components/shared-layout/meta.head";
+import {Carousel} from "@moonlay/src/components/shared-component";
+import axios from "axios";
+import * as CardMoonlay from "@moonlay/src/components/shared-component";
 
-export default function Index(){
+export default function Index(props){
   return (
       <WrapperLayout>
           <MetaHead
@@ -18,6 +21,33 @@ export default function Index(){
           />
 
         <ContainerLayout>
+            <Carousel
+                onChange={null}
+                currentSlide={0}
+                settings={{
+                    slidesToShow:4,
+                    slidesToScroll:1
+                }}
+                dataSource={props?.data ?? []}
+                render={(item,index)=> {
+                    return(
+                        <CardMoonlay.Card.Product
+                            title={item?.name ??''}
+                            images={{
+                                src: item?.thumbnail,
+                                alt: 'image-dummy',
+                                fallback: 'logo-next.png'
+                            }}
+                            url={['/product',item?.id,item?.slug].join('/')}
+                            price={{
+                                prefix:'Rp',
+                                total:item?.price
+                            }}
+                            ExtraAction={null}
+                        />
+                    )
+                }}
+            />
           <div className="py-4 relative">
             <h1 className={'font-sans text-3xl font-semibold  poppins'}>Produk Pilihan</h1>
             <Grid col={12} gap={4}>
@@ -28,7 +58,6 @@ export default function Index(){
                     </Grid.Col>
                 )
               })}
-
             </Grid>
 
           </div>
@@ -39,18 +68,23 @@ export default function Index(){
 
 export async function getServerSideProps(ctx){
   let { req,res} = ctx
+    const data = await axios.get(['http://localhost:3001','product.json'].join('/'), {})
+        .then((response)=> {
+            return response?.data ?? []
+        })
+        .catch((err)=> {
+            return []
+        })
 
-  const handler = nc()
-      .post(async (req, res, next) => {
-        console.log(req?.body,'BODY')
-        next();
-      });
-  try {
-    await handler.run(req, res);
-  } catch (e) {
-    // handle the error
-  }
-  return {
-    props: { user: req?.user ?? null },
-  };
+    return {
+        props: {
+            data: data ?? [],
+            pagination:{
+                page:1,
+                limit:10,
+                max_page:15,
+                total:150
+            }
+        }
+    }
 }
