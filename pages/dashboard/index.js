@@ -6,18 +6,24 @@
  ******************************************************************************/
 
 import React from 'react'
+import Dashboard from "@moonlay/src/components/shared-layout/private-layout/dashboard";
+import {MenuDashboardMember} from "@moonlay/src/config";
 
 export default function Index(props){
+    let  { menus } = props
     return (
-        <div className="w-full">
-            <h1>Page Dashboard</h1>
-        </div>
+        <Dashboard.Member className="w-full" menus={MenuDashboardMember}>
+            <p>Lorem ipsum dolor sit amet</p>
+        </Dashboard.Member>
     )
 }
 
 export async function getServerSideProps(ctx){
+    let role = 'member'
+
     return {
         props: {
+            roles: role,
             data: []
         }
     }

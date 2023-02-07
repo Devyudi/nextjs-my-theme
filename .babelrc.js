@@ -20,7 +20,7 @@ module.exports = {
     plugins: [
         require.resolve('babel-plugin-transform-export-extensions'),
         require.resolve('@babel/plugin-proposal-class-properties'),
-        require.resolve('@babel/plugin-proposal-private-methods'),
+        // require.resolve('@babel/plugin-proposal-private-layout-methods'),
         [
             require.resolve('babel-plugin-module-resolver'),
             {
@@ -28,7 +28,8 @@ module.exports = {
                 extensions: ['.js','.ts','.tsx','.d.ts'],
                 alias: {
                     '@moonlay/*': './src/*',
-                    '@moonlay/helpers': './src/lib/helpers/index'
+                    '@moonlay/helpers': './src/lib/helpers/index',
+                    '@moonlay/lib': './src/lib/index'
                 }
             }
         ]

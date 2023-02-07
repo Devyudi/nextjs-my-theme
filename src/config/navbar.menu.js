@@ -115,6 +115,16 @@ const defaultMenu = [
                         ]
                     },
                     {
+                        key:'components.antd/dropdown',
+                        breadcrumbs: true,
+                        path:'/components/antd/dropdown',
+                        isDisabled: false,
+                        isPrivate: false,
+                        label:'Dropdown',
+                        submenu: [
+                        ]
+                    },
+                    {
                         key:'components.antd/grid',
                         breadcrumbs: true,
                         path:'/components/antd/grid',

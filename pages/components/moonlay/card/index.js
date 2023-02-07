@@ -141,8 +141,8 @@ export default function Index(props) {
     )
 }
 
-export async function getServerSideProps(ctx){
-    const data = await axios.get(['http://localhost:3001','product.json'].join('/'), {})
+export async function getServerSideProps({req}){
+    const data = await axios.get([process.env.NEXT_PUBLIC_APP_DOMAIN,'product.json'].join('/'), {})
         .then((response)=> {
             return response?.data ?? []
         })

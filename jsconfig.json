@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@moonlay/*": ["./*"],
-      "@moonlay/helpers":["./src/lib/helpers/index"]
+      "@moonlay/helpers":["./src/lib/helpers/index"],
+      "@moonlay/lib": ["./src/lib/index"]
     }
   }
 }

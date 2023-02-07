@@ -21,7 +21,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 13px;
   line-height: 1.6;
-
+  //
   @include themify($themes) {
     color: themed('colorText');
   }
@@ -39,7 +39,7 @@ ul, ol {
 a {
   color: $color-blue;
   transition: all 0.3s;
-
+  text-decoration: none;
   &:hover {
     text-decoration: none;
 
