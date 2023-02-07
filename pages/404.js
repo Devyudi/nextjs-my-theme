@@ -9,8 +9,6 @@ import {MenuDashboardMember} from "@moonlay/src/config";
 
 export default function NotFound(props){
     const route = useRouter()
-    // const session = useSession()
-    console.log({props,route})
 
     const onGoBack = ()=> {
         route.back()

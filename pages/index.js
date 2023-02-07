@@ -1,16 +1,15 @@
-import React from 'react'
-import Head from 'next/head'
-import nc from 'next-connect'
+import React, {useRef, useEffect, useState} from 'react'
 import {ContainerLayout, WrapperLayout} from "@moonlay/src/components/shared-layout";
-import { PrismaClient } from '@prisma/client'
 import {Card} from "@moonlay/src/components/shared-component/card";
-import Grid from "@moonlay/src/components/shared-component/grid/default.grid";
-import { Button, Form, Input, InputNumber } from 'antd';
 import MetaHead from "@moonlay/src/components/shared-layout/meta.head";
 import {Carousel} from "@moonlay/src/components/shared-component";
 import axios from "axios";
 import * as CardMoonlay from "@moonlay/src/components/shared-component";
-
+import useWindowDimensions from "@moonlay/src/hooks/windows-dimension.hooks";
+import useInViewport from "@moonlay/src/hooks/in-viewport.hooks";
+import { useInView,InView } from 'react-intersection-observer'
+import ProductHistorySearchComponent
+    from "@moonlay/src/components/shared-component-pages/home/product-history-search.component";
 export default function Index(props){
   return (
       <WrapperLayout>
@@ -19,56 +18,151 @@ export default function Index(props){
                   title:'Core@2022 | moonlay'
               }}
           />
+        <ContainerLayout className={'space-y-6'}>
 
-        <ContainerLayout>
-            <Carousel
-                onChange={null}
-                currentSlide={0}
-                settings={{
-                    slidesToShow:4,
-                    slidesToScroll:1
-                }}
-                dataSource={props?.data ?? []}
-                render={(item,index)=> {
-                    return(
-                        <CardMoonlay.Card.Product
-                            title={item?.name ??''}
-                            images={{
-                                src: item?.thumbnail,
-                                alt: 'image-dummy',
-                                fallback: 'logo-next.png'
-                            }}
-                            url={['/product',item?.id,item?.slug].join('/')}
-                            price={{
-                                prefix:'Rp',
-                                total:item?.price
-                            }}
-                            ExtraAction={null}
-                        />
-                    )
-                }}
-            />
-          <div className="py-4 relative">
-            <h1 className={'font-sans text-3xl font-semibold  poppins'}>Produk Pilihan</h1>
-            <Grid col={12} gap={4}>
-              {[0,1,2,3,4,5,6,7,8].map((item)=> {
-                return (
-                    <Grid.Col xs={6} lg={3} xl={3} key={item}>
-                      <Card.Primary title={'Card Primary'}/>
-                    </Grid.Col>
-                )
-              })}
-            </Grid>
+            <section className={'mt-6'}>
+                <Carousel
+                    onChange={null}
+                    currentSlide={0}
+                    settings={{
+                        dots:false,
+                        slidesToShow:1,
+                        slidesToScroll:1,
+                        autoPlay:true,
+                        speed:1000,
+                        infinite:true,
+                        className: 'mx-0 rounded-xl',
+                        responsive:[]
+                    }}
+                    classes={{
+                        item:'px-0'
+                    }}
+                    dataSource={[0,1,2]}
+                    render={(item,index)=> {
+                        return(
+                            <div className="w-full h-60 bg-blue-400 rounded-xl flex items-center justify-center text-white" key={`carousel-${index}`}>
+                                Sliders Index {index}
+                            </div>
+                        )
+                    }}
+                />
+            </section>
 
-          </div>
+            <section className="w-full space-y-4">
+                <h2 className={'poppins font-semibold tracking-tighter text-xl'}>Untuk Kamu</h2>
+                <p>Lorem ipsum dolor sit amet lorem ipsum dolor sit amet</p>
+                <div className="w-full">
+                    <Carousel
+                        onChange={null}
+                        currentSlide={0}
+                        settings={{
+                            slidesToShow:5,
+                            slidesToScroll:3,
+                            autoPlay:true,
+                            infinite:true,
+                            className: 'mx-0'
+                        }}
+                        classes={{
+                            item:'pr-2'
+                        }}
+                        dataSource={props?.data ?? []}
+                        render={(item,index)=> {
+                            return(
+                                <CardMoonlay.Card.Product
+                                    title={item?.name ??''}
+                                    images={{
+                                        src: item?.thumbnail,
+                                        alt: 'image-dummy',
+                                        fallback: 'logo-next.png'
+                                    }}
+                                    url={['/product',item?.id,item?.slug].join('/')}
+                                    price={{
+                                        prefix:'Rp',
+                                        total:item?.price
+                                    }}
+                                    ExtraAction={null}
+                                />
+                            )
+                        }}
+                    />
+                </div>
+            </section>
+
+            <section className="w-full space-y-4">
+                <h2 className={'poppins font-semibold tracking-tighter text-xl'}>Wishlist</h2>
+                <p>Lorem ipsum dolor sit amet lorem ipsum dolor sit amet</p>
+                <div className="w-full">
+                    <Carousel
+                        onChange={null}
+                        currentSlide={0}
+                        settings={{
+                            dots:false,
+                            slidesToShow:5,
+                            slidesToScroll:3,
+                            autoPlay:true,
+                            infinite:true,
+                            className: 'mx-0',
+                            responsive:[]
+                        }}
+                        classes={{
+                            item:'pr-2'
+                        }}
+                        dataSource={props?.data.sort((a,b)=> {return b-a}) ?? []}
+                        render={(item,index)=> {
+                            return(
+                                <CardMoonlay.Card.Product
+                                    title={item?.name ??''}
+                                    images={{
+                                        src: item?.thumbnail,
+                                        alt: 'image-dummy',
+                                        fallback: 'logo-next.png'
+                                    }}
+                                    url={['/product',item?.id,item?.slug].join('/')}
+                                    price={{
+                                        prefix:'Rp',
+                                        total:item?.price
+                                    }}
+                                    ExtraAction={null}
+                                />
+                            )
+                        }}
+                    />
+                </div>
+            </section>
+
+
+
+            <InView>
+                {({inView,ref,entry})=> (
+                    <section ref={ref}>
+                        <ProductHistorySearchComponent inScreen={inView}/>
+                    </section>
+                )}
+            </InView>
         </ContainerLayout>
       </WrapperLayout>
   )
 }
 
+function ComponentInScreenActive(props){
+    const { height, width } = useWindowDimensions();
+    const divRef = useRef(null)
+
+    return (
+        <InView>
+            {({inView,ref,entry})=> (
+
+                <div className="w-full h-80 bg-red-500" ref={ref}>
+                    <p>{`Header inside viewport ${inView}`}</p>
+                </div>
+            )}
+        </InView>
+    )
+}
+
+
 export async function getServerSideProps(ctx){
-  let { req,res} = ctx
-    const data = await axios.get(['http://localhost:3001','product.json'].join('/'), {})
+    const data = await axios.get([process.env.NEXT_PUBLIC_APP_DOMAIN,'product.json'].join('/'), {})
         .then((response)=> {
             return response?.data ?? []
         })

@@ -100,7 +100,7 @@ export default function Index(props){
 
 export async function getServerSideProps(ctx){
     let { detail } = ctx.query
-
+    console.log(detail,'DETAIL')
     let propsData = {
         isEmpty:false,
         data: [],
@@ -110,7 +110,7 @@ export async function getServerSideProps(ctx){
         }
     }
 
-    let data = await axios.get('http://localhost:3001/product.json',{})
+    let data = await axios.get([process.env.NEXT_PUBLIC_APP_DOMAIN,'product.json'].join('/'),{})
         .then((response)=> {
             return response?.data ?? []
         })

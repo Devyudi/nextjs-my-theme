@@ -12,11 +12,12 @@ import Helpers from "@moonlay/helpers";
 import Image from 'next/image';
 
 class Card extends Component{
-
     static Shop = CardShop
     static Primary = CardPrimary
     static Secondary = CardSecondary
     static Product = CardProduct
+
+    static Banner = CardBanner
 
     render() {
         return (
@@ -70,7 +71,28 @@ CardShop.propTypes = {
 }
 CardShop.defaultProps = {}
 
+/**
+ * @private
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function CardBanner(props){
+    return (
+        <div className="w-full">
+            <h1>Card Banner</h1>
+        </div>
+    )
+}
+CardBanner.propTypes = {}
+CardBanner.defaultProps = {}
 
+/**
+ * @private
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function CardProduct(props){
     let {url,price,ExtraAction,images} = props
     return (
@@ -87,7 +109,17 @@ function CardProduct(props){
                 </div>
             </div>
             <div className={'w-full h-full absolute top-0 left-0 object-cover'}>
-                <Image width={1920} height={1920} {...images} src={images?.src} className={'w-full h-full absolute top-0 left-0 object-cover'}  alt={images?.alt ?? ''}/>
+                <Image
+                    {...images}
+                    // width={images?.width ?? 520}
+                    // height={images?.height ?? 520}
+                    // placeholder={'blur'}
+                    fill
+                    sizes={"(max-width:768px) 100vw,(max-width:1200px) 50vw, 33vw"}
+                    src={[images?.src].join('')}
+                    className={'w-full h-full absolute top-0 left-0 object-cover'}
+                    alt={images?.alt ?? ''}
+                />
             </div>
         </div>
     )

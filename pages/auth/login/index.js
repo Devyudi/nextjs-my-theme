@@ -9,7 +9,7 @@ import React, {useState,useEffect} from 'react'
 import {  signIn } from 'next-auth/react'
 import { Card, Form, Button, Typography,Input,message, Divider} from 'antd'
 import { useFormik, Field, ErrorMessage } from 'formik';
-import { EyeOutlined } from '@ant-design/icons'
+import { EyeOutlined,EyeInvisibleOutlined } from '@ant-design/icons'
 import * as Yup from 'yup';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -34,6 +34,7 @@ export default function Index(props){
                 .required('Please enter your email'),
             password: Yup.string().required('Please enter your password'),
         }),
+
         onSubmit: async (values) => {
             message.success({
                 content: JSON.stringify(values),
@@ -54,6 +55,7 @@ export default function Index(props){
             } else {
                 setError(null);
             }
+            await router.push('/')
         }
     })
 
@@ -81,6 +83,10 @@ export default function Index(props){
                         <form onSubmit={formik.handleSubmit} autoComplete={'off'} className="space-y-4 flex flex-col ">
                             <label htmlFor="email">
                                 <Input
+                                    status={formik.errors &&
+                                    formik.touched &&
+                                    formik.touched.email &&
+                                    formik.errors.email ? 'error':'default'}
                                     size={'large'}
                                     name={'email'}
                                     type={'email'}
@@ -88,38 +94,45 @@ export default function Index(props){
                                     value={formik.values.email}
                                     onChange={formik.handleChange}
                                 />
-
+                                {
+                                    formik.errors &&
+                                    formik.touched &&
+                                    formik.touched.email &&
+                                    formik.errors.email &&
+                                    <span className={'text-xs text-red-500'}>{formik.errors?.email}</span>}
                             </label>
                             <label htmlFor="password">
                                 <Input
+                                    status={
+                                        formik.errors &&
+                                        formik.touched &&
+                                        formik.touched.password &&
+                                        formik.errors.password ?
+                                            'error':
+                                            'default'
+                                    }
                                     size={'large'}
                                     name={'password'}
                                     type={`${show ? 'text' : 'password'}`}
                                     addonAfter={
+                                    show ?
+                                        <EyeInvisibleOutlined onClick={ShowPassword}/>
+                                        :
                                         <EyeOutlined onClick={ShowPassword}/>
+
                                     }
                                     placeholder={'password'}
                                     value={formik.values.password}
                                     onChange={formik.handleChange}
                                 />
+                                {
+                                    formik.errors &&
+                                    formik.touched &&
+                                    formik.touched.password &&
+                                    formik.errors.password &&
+                                    <span className={'text-xs text-red-500'}>{formik.errors?.password}</span>
+                                }
 
-                                {/*<Input*/}
-                                {/*    name={'password'}*/}
-                                {/*    value={formik.values.password}*/}
-                                {/*    onChange={formik.handleChange}*/}
-                                {/*    type={`${show ? 'text' : 'password'}`}*/}
-                                {/*    placeholder={'password'}*/}
-                                {/*    className={'px-4 py-2 w-full h-full border-0  bg-gray-100 dark:text-white focus:outline-0 outline-0 text-gray-500'}*/}
-                                {/*    spellCheck={'false'}*/}
-                                {/*    autoComplete={'new-password'}*/}
-                                {/*/>*/}
-                                {/*<div className="w-12 h-12 absolute right-0 top-0 flex items-center justify-center">*/}
-                                {/*    <Button*/}
-                                {/*        onClick={ShowPassword}*/}
-                                {/*        type={'primary'}*/}
-                                {/*        icon={<EyeOutlined/>}*/}
-                                {/*    />*/}
-                                {/*</div>*/}
                             </label>
 
                             <Link href={'/auth/forgot/password'}>
@@ -131,7 +144,7 @@ export default function Index(props){
 
                             <button
                                 type={'submit'}
-                                className={'border-0 focus:outline-0 outline-0  bg-gradient-to-r from-red-500 to-orange-400 transition duration-200 hover:bg-red-600 text-md font-semibold py-3 px-4 text-center rounded-full text-white'}>
+                                className={'cursor-pointer border-0 focus:outline-0 outline-0  bg-gradient-to-r from-red-500 to-orange-400 transition duration-200 hover:bg-red-600 text-md font-semibold py-3 px-4 text-center rounded-full text-white'}>
                                 Masuk
                             </button>
 

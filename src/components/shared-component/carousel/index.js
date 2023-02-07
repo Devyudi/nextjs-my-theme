@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Slider from 'react-slick'
+import {Button} from "antd";
+import {LeftOutlined, RightOutlined} from "@ant-design/icons";
 
 class Carousel extends Component {
     constructor(props = {}){
@@ -9,7 +11,7 @@ class Carousel extends Component {
             currentSlide: this.props?.currentSlide ?? 1,
             settings:{
                 ...this.props.settings,
-                dots: this.props?.settings?.dots ?? false,
+                dots: this.props?.settings?.dots ?? true,
                 infinite: this.props?.settings?.infinite ?? false,
                 speed: this.props?.settings?.speed ?? 500,
                 lazyLoad: this.props?.settings?.lazyload ?? false,
@@ -23,7 +25,7 @@ class Carousel extends Component {
                             slidesToShow: 3,
                             slidesToScroll: 3,
                             infinite: true,
-                            dots: true
+                            dots: false
                         }
                     },
                     {
@@ -50,62 +52,35 @@ class Carousel extends Component {
                     }
 
                 },
-                appendDots: dots => {
-                    return (
-                        <div>
-                            <ul className={'space-x-2 w-full mx-auto'}>
-                                {dots.map((item, index) => {
-                                    return (
-                                        <li className={'emk-dots'}>
-                                            {item.props.children}
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </div>
-                    )
-                },
-                customPaging: i => {
-
-                    return (
-                        <div
-                            className={`${i === this.state.currentSlide ? "bg-cyan-500 " : " dark:bg-gray-500 bg-gray-300 hover:bg-cyan-500"} transition duration-200  h-full w-full rounded-full`}
-                            style={{
-                                height: '100%',
-                                width: "100%"
-                            }}
-                        >
-
-                        </div>
-                    )
-                },
-                nextArrow: null,
-                prevArrow: null
+                prevArrow: this.props.settings.prevArrow ?? <div><Button type={'primary'} shape={'circle'} icon={<LeftOutlined/>}/></div>,
+                nextArrow: this.props.settings.nextArrow ?? <div><Button type="primary" shape="circle" icon={<RightOutlined />} /></div>,
             }
         }
     }
     render(){
         return (
-            <div className="w-full overflow-x-hidden">
-                <Slider {...this.state.settings}>
-                    {
-                        'dataSource' in this.props && Array.isArray(this.props['dataSource']) &&
-                        this.props.dataSource.map((item,index)=> {
-                            return (
-                                <div className={!this.props.disableGap ? 'px-4':''}>
-                                    {this.props.render(item,index)}
-                                </div>
-                            )
-                        })
-                    }
-                </Slider>
-            </div>
+            <Slider {...this.state.settings} className={[this.state.settings.className,this.props?.classes?.parent].join(' ')}>
+                {
+                    'dataSource' in this.props && Array.isArray(this.props['dataSource']) &&
+                    this.props.dataSource.map((item,index)=> {
+                        return (
+                            <div className={!this.props.classes?.item ? 'px-4':this.props.classes?.item}>
+                                {this.props.render(item,index)}
+                            </div>
+                        )
+                    })
+                }
+            </Slider>
         )
     }
 }
 
 Carousel.propTypes = {
     currentSlide: PropTypes.number,
+    classes: PropTypes.shape({
+        item: PropTypes.string,
+        parent: PropTypes.string,
+    }),
     onChange: PropTypes.func,
     dataSource: PropTypes.array.isRequired,
     render: PropTypes.func,
@@ -127,12 +102,18 @@ Carousel.propTypes = {
                     dots: PropTypes.oneOf([true,false])
                 }).isRequired
             },).isRequired
-        )
+        ),
+        prevArrow: PropTypes.any,
+        nextArrow: PropTypes.any
     }).isRequired,
 
 }
 Carousel.defaultProps = {
     onChange: null,
+    classes: {
+        item: null,
+        parent: null
+    },
     currentSlide:1
 }
 
