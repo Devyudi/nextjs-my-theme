@@ -11,6 +11,57 @@ const defaultMenu = [
         submenu: []
     },
     {
+        key:'product',
+        breadcrumbs: true,
+        path:'/dashboard/product',
+        icon: LaptopOutlined,
+        label:'Product',
+        submenu: [
+            {
+                key:'product.list',
+                breadcrumbs: true,
+                path:'/dashboard/product',
+                icon: LaptopOutlined,
+                label:'List',
+                submenu: []
+            },
+            {
+                key:'product.create',
+                breadcrumbs: true,
+                path:'/dashboard/product/create',
+                icon: LaptopOutlined,
+                label:'Create',
+                submenu: []
+            }
+        ]
+    },
+    {
+        key:'category',
+        breadcrumbs: true,
+        path:'/dashboard/category',
+        icon: LaptopOutlined,
+        label:'Category',
+        submenu: [
+            {
+                key:'category.list',
+                breadcrumbs: true,
+                path:'/dashboard/category',
+                icon: LaptopOutlined,
+                label:'List',
+                submenu: []
+            },
+            {
+                key:'category.create',
+                breadcrumbs: true,
+                path:'/dashboard/category/create',
+                icon: LaptopOutlined,
+                label:'Create',
+                submenu: []
+            }
+        ]
+    },
+
+    {
         key:'user',
         breadcrumbs: true,
         path:'/dashboard/user',

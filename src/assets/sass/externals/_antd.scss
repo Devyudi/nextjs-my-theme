@@ -1,5 +1,26 @@
 //ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-light w-full border-0 css-dev-only-do-not-override-1n7nwfa
 
+%input-antd-placeholder {
+  &::-webkit-input-placeholder { /* Edge */
+    font-size: $font-size-sm !important;
+    letter-spacing: normal !important;
+  }
+
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-size: $font-size-sm !important;
+    letter-spacing: normal !important;
+  }
+
+  &::placeholder {
+    font-size: $font-size-sm !important;
+    letter-spacing: normal !important;
+  }
+}
+%input-antd{
+  height:45px;
+  width: 100% !important;
+}
+
 .ant{
   &-menu{
 
@@ -207,6 +228,71 @@
     }
     &:not(.ant-layout-has-sider){
 
+    }
+  }
+}
+
+
+/**
+ * Ant Form
+ */
+.ant{
+
+  &-input{
+    @extend %input-antd;
+    @extend %input-antd-placeholder;
+  }
+  &-form{
+    &-item{
+      &-control{
+        &-input{
+          width:100% !important;
+          &-content{
+            @extend %input-antd;
+            @extend %input-antd-placeholder;
+
+            input{
+              width:100% !important;
+              height:100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * Ant Image Preview
+ */
+.ant{
+  &-image{
+    &-preview{
+      &-img{
+        object-fit: contain !important;
+        height: 100% !important;
+        width:100%;
+      }
+      &-operations{
+        &-wrapper{
+          background:rgba(33,103,219,0.53) !important;
+          z-index: 999999 !important;
+        }
+      }
+      &-root{
+
+
+      }
+      &-wrap{
+        z-index:10000 !important
+      }
+      &-mask{
+        z-index:9999 !important;
+      }
+      &-content{
+
+      }
     }
   }
 }

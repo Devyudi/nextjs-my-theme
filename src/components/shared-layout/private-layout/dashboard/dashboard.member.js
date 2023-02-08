@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {ChildrenLayout} from "@moonlay/src/components/shared-layout";
 import {Breadcrumb, Layout, Menu} from "antd";
 import Link from 'next/link'
+import {MenuDashboardMember} from "@moonlay/src/config";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -26,8 +27,8 @@ export default function DashboardMember(props){
                             }}
                         >
                             {
-                                Array.isArray(menus) && menus.length > 0 &&
-                                menus.map((cObj,cKey)=> {
+                                Array.isArray(MenuDashboardMember) && MenuDashboardMember.length > 0 &&
+                                MenuDashboardMember.map((cObj,cKey)=> {
                                     return Array.isArray(cObj?.submenu) &&  cObj?.submenu.length > 0 ?
                                         <Menu.SubMenu title={cObj?.label}>
                                             {cObj?.submenu.map((childTwo,childKey)=> {
@@ -56,15 +57,6 @@ export default function DashboardMember(props){
                             minHeight: 280,
                         }}
                     >
-                        <Breadcrumb
-                            style={{
-                                margin: '16px 0',
-                            }}
-                        >
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
-                        </Breadcrumb>
                         <ChildrenLayout children={props?.children}/>
                     </Content>
 
@@ -79,5 +71,5 @@ DashboardMember.propTypes = {
     menus: PropTypes.array.isRequired
 }
 DashboardMember.defaultProps = {
-    menus : []
+    menus : MenuDashboardMember
 }

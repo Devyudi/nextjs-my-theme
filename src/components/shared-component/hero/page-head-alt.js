@@ -31,13 +31,16 @@ function IconComponent({icon}){
     return null
 }
 
-function PageHeadAlt({title,description,icon}){
+function PageHeadAlt({title,description,icon,extra}){
     return (
         <div className="w-full h-40 mb-2 app-page-header">
             <ContainerLayout className={'flex justify-center flex-col'}>
-                <div className={'w-full flex items-center gap-4'}>
-                    <IconComponent icon={icon}/>
-                    <h1 className={'font-bold tracking-wides'}>{title}</h1>
+                <div className={'w-full flex items-center justify-between gap-4'}>
+                    <div className={'w-full flex items-center gap-4'}>
+                        <IconComponent icon={icon}/>
+                        <h1 className={'font-bold tracking-wides'}>{title}</h1>
+                    </div>
+                    {extra && extra}
                 </div>
                 <p className={'font-normal text-normal tracking-wides poppins'}>{description}</p>
             </ContainerLayout>
@@ -49,6 +52,7 @@ PageHeadAlt.propTypes = {
         element: PropTypes.node,
         src: PropTypes.string
     }),
+    extra: PropTypes.any,
     title: PropTypes.string.isRequired,
     description: PropTypes.string
 }
@@ -57,6 +61,7 @@ PageHeadAlt.defaultProps = {
         element:null,
         src:'/next.svg'
     },
+    extra: null,
     title: "",
     description:''
 }

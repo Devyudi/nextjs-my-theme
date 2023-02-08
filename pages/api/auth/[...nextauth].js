@@ -61,28 +61,6 @@ export default NextAuth({
 
             },
         }),
-        // CredentialsProvider({
-        //     id: "credentials-register",
-        //     name: "indozone-register",
-        //     credentials: {
-        //         email: {
-        //             label: "Email",
-        //             type: "email",
-        //             placeholder: ""
-        //         },
-        //         password: {
-        //             label: "Password",
-        //             type: "password"
-        //         },
-        //         confirm_password: {
-        //             label: "Confirm Password",
-        //             type: "password"
-        //         }
-        //     },
-        //     async authorize(credentials, req) {
-        //         return null;
-        //     }
-        // }),
         GoogleProvider({
             clientId: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
