@@ -29,7 +29,8 @@ module.exports = {
                 alias: {
                     '@moonlay/*': './src/*',
                     '@moonlay/helpers': './src/lib/helpers/index',
-                    '@moonlay/lib': './src/lib/index'
+                    '@moonlay/lib': './src/lib/index',
+                    '@moonlay/*': './src/*',
                 }
             }
         ]
