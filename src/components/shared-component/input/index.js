@@ -1,7 +1,8 @@
 import React,{Component} from 'react'
 import PropTypes from 'prop-types'
-class Input extends Component{
+import {Tooltip} from "antd";
 
+class Input extends Component{
     onChange(e){
         e.preventDefault()
     }
@@ -47,5 +48,9 @@ Input.defaultProps = {
         console.log(e.target.value)
     }
 }
+
+
+
+
 
 export { Input }

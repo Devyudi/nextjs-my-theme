@@ -7,6 +7,8 @@
 .app{
   &-page{
     &-header{
+      width: calc(100% + 50px) !important;
+      margin: 0 -25px !important;
       @include themify($themes){
         background: themed('card') !important;
       }

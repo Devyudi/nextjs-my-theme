@@ -18,15 +18,6 @@ export default class Dashboard extends Component{
                     <div className="logo"/>
                 </Header>
                 <Content>
-                    <Breadcrumb
-                        style={{
-                            margin: '16px 0',
-                        }}
-                    >
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
                     <Layout>
                         <Sider
                             width={200}

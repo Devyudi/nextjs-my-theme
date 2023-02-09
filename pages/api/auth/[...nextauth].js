@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
+import {AuthController} from "@moonlay/controllers";
 /**
  * Takes a token, and returns a new token with updated
  * `accessToken` and `accessTokenExpires`. If an error occurs,
@@ -21,68 +22,24 @@ export default NextAuth({
                 password: {label: 'Password', type: 'password'},
             },
             async authorize(credentials, req) {
-                //_call api
-                // return await new AuthService({}).login({email: credentials?.email, password: credentials?.password})
-                //     .then(async (response) => {
-                //         if (response?.error) {
-                //             return response
-                //         } else {
-                //             if (response.data) {
-                //                 return {
-                //                     ...response?.data
-                //                 }
-                //
-                //             }
-                //         }
-                //
-                //     })
-                //     .catch((err) => {
-                //         return null
-                //     })
-
-
-                //dummy
-                const payload = {
-                    email: credentials.email,
-                    password: credentials.password,
-                    callbackUrl:req.headers.origin
-                };
-
-                return {
-                    payload,
-                    user :{
-                        data: {
-                            token: "kjbIOIUGBKJaskdjbasd"
-                        },
-                        name: "John doe",
-                        email: "email@gmail.com"
+                //_contoller Auth
+                const [ err, data ] = await new AuthController({
+                    fields: credentials
+                })._signIn()
+                if(err){
+                    return {
+                        error: true,
+                        message: err?.message,
+                        data: null
                     }
                 }
 
+                return {
+                    error:false,
+                    ...data,
+                }
             },
         }),
-        // CredentialsProvider({
-        //     id: "credentials-register",
-        //     name: "indozone-register",
-        //     credentials: {
-        //         email: {
-        //             label: "Email",
-        //             type: "email",
-        //             placeholder: ""
-        //         },
-        //         password: {
-        //             label: "Password",
-        //             type: "password"
-        //         },
-        //         confirm_password: {
-        //             label: "Confirm Password",
-        //             type: "password"
-        //         }
-        //     },
-        //     async authorize(credentials, req) {
-        //         return null;
-        //     }
-        // }),
         GoogleProvider({
             clientId: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
@@ -113,14 +70,31 @@ export default NextAuth({
         async redirect({url, baseUrl}) {
             return baseUrl
         },
-        // async signIn({account, profile, user, credentials}) {
-        //     if (user?.error) return false
-        //
-        //     if (account.provider === "google") {
-        //         return profile.email_verified // && profile.email.endsWith("@gmail.com")
-        //     }
-        //     return true // Do different verification for other providers that don't have `email_verified`
-        // },
+        async signIn({account, profile, user, credentials}) {
+
+            switch(account?.provider){
+                case "credentials":
+                    return !user?.error
+                default:
+                    return false
+            }
+            // console.log({user,account,profile,credentials})
+            // if(user?.error) return false
+            //
+            // if (account.provider === "google") {
+            //     return profile.email_verified // && profile.email.endsWith("@gmail.com")
+            // }
+            // return true // Do different verification for other providers that don't have `email_verified`
+        },
+        async jwt({token= {}, user, profile,account}){
+            return {
+                ...token,
+                user:{
+                    ...user,
+                    test:1
+                }
+            }
+        }
         // async jwt({token = {}, user, profile, account}) {
         //
         //     user && (token.user = user)

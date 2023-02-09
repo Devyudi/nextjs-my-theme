@@ -12,8 +12,8 @@ model User {
   username String @db.VarChar(100)
   email    String @unique @db.VarChar(255)
   password String @db.VarChar(255)
-  createdAt DateTime  @default(now()) @db.Timestamp(0)
-  updatedAt DateTime  @default(now()) @db.Timestamp(0)
+  createdAt DateTime?  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime?  @default(now()) @db.Timestamp(0)
   deletedAt DateTime?
 
   authors Posts_author[]
